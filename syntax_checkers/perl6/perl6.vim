@@ -152,7 +152,6 @@ function! Perl6Preprocess(errors) abort
     return syntastic#util#unique(out)                                           
 endfunction
 
-
 function! SyntaxCheckers_perl6_perl6_GetHighlightRegex(item)
     let eject_pat     = '------>\s*\(.\{-}\)⏏'
     let can_only_pat  = "^Can only use '" . '\(.\{-}\)' . "'"
