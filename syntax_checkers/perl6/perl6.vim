@@ -69,6 +69,7 @@ function! SyntaxCheckers_perl6_perl6_GetLocList() dict " {{{1
         \ 'makeprg': makeprg,
         \ 'errorformat': errorformat,
         \ 'Preprocess': 'Perl6Preprocess',
+ 		\ 'env': { 'RAKUDO_ERROR_COLOR': '' },
         \ 'defaults': {'type': 'E'} })
     if !empty(errors)
         return errors
@@ -153,22 +154,45 @@ function! Perl6Preprocess(errors) abort
 endfunction
 
 function! SyntaxCheckers_perl6_perl6_GetHighlightRegex(item)
-    let eject_pat     = '------>\s*\(.\{-}\)⏏'
-    let can_only_pat  = "^Can only use '" . '\(.\{-}\)' . "'"
-    let undecl_pat    = '^Undeclared .*:\W\(.\{-}\)\s'
-    let not_found_pat = 'Could not find \(.\{-}\) at'
-    
-    for pat in [ eject_pat, can_only_pat, undecl_pat, not_found_pat ]
-        if match(a:item['text'], pat) > -1 
-            let parts = matchlist(a:item['text'], pat)
-            if !empty(parts)
-                return parts[1]
-            endif
-        endif
-    endfor
-
-    return ''
+	" Arrow-eject errors
+    let parts = matchlist(a:item['text'], 
+		\'------>\s*\(.\{-}\)<HERE>')                         
+    if !empty(parts)                                                   
+        return '\V' . escape(parts[1], '\')
+    endif
+	" Default (catches also '^Can only use'
+    let term = matchstr(a:item['text'], '\m''\zs.\{-}\ze''')
+    if term !=# ''
+        return '\V' . escape(term, '\')
+    endif
+	"Undeclare routines and names
+    let term = matchstr(a:item['text'], '\m^Undeclared .\+:\W\zs\S\+\ze')
+    if term !=# ''
+        return '\V' . escape(term, '\')
+    endif
+	"Not found modules
+    let term = matchstr(a:item['text'], '\mCould not find \zs.\{-}\ze at')
+    return term !=# '' ? '\V' . escape(term, '\') : ''
 endfunction
+
+
+"function! SyntaxCheckers_perl6_perl6_GetHighlightRegex(item)
+"    let eject_pat     = '------>\s*\(.\{-}\)⏏'
+"    let can_only_pat  = "^Can only use '" . '\(.\{-}\)' . "'"
+"    let undecl_pat    = '^Undeclared .*:\W\(.\{-}\)\s'
+"    let not_found_pat = 'Could not find \(.\{-}\) at'
+"    
+"    for pat in [ eject_pat, can_only_pat, undecl_pat, not_found_pat ]
+"        if match(a:item['text'], pat) > -1 
+"            let parts = matchlist(a:item['text'], pat)
+"            if !empty(parts)
+"                return parts[1]
+"            endif
+"        endif
+"    endfor
+"
+"    return ''
+"endfunction
 
 
 call g:SyntasticRegistry.CreateAndRegisterChecker({
