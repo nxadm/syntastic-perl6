@@ -175,26 +175,6 @@ function! SyntaxCheckers_perl6_perl6_GetHighlightRegex(item)
     return term !=# '' ? '\V' . escape(term, '\') : ''
 endfunction
 
-
-"function! SyntaxCheckers_perl6_perl6_GetHighlightRegex(item)
-"    let eject_pat     = '------>\s*\(.\{-}\)⏏'
-"    let can_only_pat  = "^Can only use '" . '\(.\{-}\)' . "'"
-"    let undecl_pat    = '^Undeclared .*:\W\(.\{-}\)\s'
-"    let not_found_pat = 'Could not find \(.\{-}\) at'
-"    
-"    for pat in [ eject_pat, can_only_pat, undecl_pat, not_found_pat ]
-"        if match(a:item['text'], pat) > -1 
-"            let parts = matchlist(a:item['text'], pat)
-"            if !empty(parts)
-"                return parts[1]
-"            endif
-"        endif
-"    endfor
-"
-"    return ''
-"endfunction
-
-
 call g:SyntasticRegistry.CreateAndRegisterChecker({
     \ 'filetype': 'perl6',
     \ 'name': 'perl6',
