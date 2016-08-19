@@ -29,6 +29,7 @@
 "
 " - https://docs.perl6.org/programs/00-running
 
+"Initialization
 if exists('g:syntastic_extra_filetypes')
     call add(g:syntastic_extra_filetypes, 'perl6')
 else
@@ -40,14 +41,58 @@ if exists('g:loaded_syntastic_perl6_perl6_checker')
 endif
 let g:loaded_syntastic_perl6_perl6_checker = 1
 
+"Includes
 if !exists('g:syntastic_perl6_lib_path')
     let g:syntastic_perl6_lib_path = []
+elseif type(g:syntastic_perl6_lib_path) == type('')
+    call syntastic#log#oneTimeWarn('variable g:syntastic_perl6_lib_path should be a list')
+        let includes = split(g:syntastic_perl6_lib_path, ',')
+    else
+        let includes = copy(syntastic#util#var('perl6_lib_path'))
 endif
+
+if $PERL6LIB != '' "Support for PERL6LIB shell environment
+    let perl6lib = includes + split($PERL6LIB, ':')
+    let includes = perl6lib
+endif
+let g:syntastic_perl6_lib_path = includes
 
 let s:save_cpo = &cpo
 set cpo&vim
 
-function! Perl6Preprocess(errors) abort " {{{2                       
+function! SyntaxCheckers_perl6_perl6_GetLocList() dict " {{{1
+    let includes_str = join(map(g:syntastic_perl6_lib_path, '"-I" . v:val'))
+    let errorformat = '%f|:|%l|:|%m'
+    let makeprg = self.makeprgBuild({ 'args_before': '-c ' . includes_str})
+    
+    let errors = SyntasticMake({
+        \ 'makeprg': makeprg,
+        \ 'errorformat': errorformat,
+        \ 'Preprocess': 'Perl6Preprocess',
+        \ 'defaults': {'type': 'E'} })
+    if !empty(errors)
+        return errors
+    endif
+    
+    let makeprg = self.makeprgBuild({ 'args_before': '-c ' . includes_str })
+    
+    return SyntasticMake({
+        \ 'makeprg': makeprg,
+        \ 'errorformat': errorformat,
+        \ 'Preprocess': 'Perl6Preprocess',
+        \ 'defaults': {'type': 'W'} })
+endfunction " }}}1
+
+function! SyntaxCheckers_perl6_perl6_IsAvailable() dict
+    if exists('g:syntastic_perl6_interpreter')
+        let binary = g:syntastic_perl6_interpreter
+    else
+        let binary = self.getExecEscaped()
+    endif
+    return executable(binary)
+endfunction
+
+function! Perl6Preprocess(errors) abort
     let out               = [] "List of errors                                  
     let err_str           = {} "Error parts                                     
     let err_str.msg       = '' "We'll concatenate the messages                  
@@ -105,17 +150,8 @@ function! Perl6Preprocess(errors) abort " {{{2
     endif                                                                       
                                                                                 
     return syntastic#util#unique(out)                                           
-endfunction " }}}2 
-function! SyntaxCheckers_perl6_perl6_IsAvailable() dict " {{{1
-    if exists('g:syntastic_perl6_interpreter')
-        let g:syntastic_perl6_perl6_exec = g:syntastic_perl6_interpreter
-    endif
+endfunction
 
-    " don't call executable() here, to allow things like
-    " let g:syntastic_perl6_interpreter='/usr/bin/env perl6'
-    silent! call syntastic#util#system(self.getExecEscaped() . ' -e ' . syntastic#util#shescape('exit(0)'))
-    return v:shell_error == 0
-endfunction " }}}1
 
 function! SyntaxCheckers_perl6_perl6_GetHighlightRegex(item)
     let eject_pat     = '------>\s*\(.\{-}\)⏏'
@@ -135,43 +171,6 @@ function! SyntaxCheckers_perl6_perl6_GetHighlightRegex(item)
     return ''
 endfunction
 
-function! SyntaxCheckers_perl6_perl6_GetLocList() dict " {{{1
-    if type(g:syntastic_perl6_lib_path) == type('')
-        call syntastic#log#oneTimeWarn('variable g:syntastic_perl6_lib_path should be a list')
-        let includes = split(g:syntastic_perl6_lib_path, ',')
-    else
-        let includes = copy(syntastic#util#var('perl6_lib_path'))
-    endif
-
-    "Support for PERL6LIB shell environment
-    if $PERL6LIB != ''
-        let perl6lib = includes + split($PERL6LIB, ':')
-        let includes = perl6lib
-    endif
-
-    let shebang = syntastic#util#parseShebang()
-    let extra = join(map(includes, '"-I" . v:val'))
-    "let errorformat = '%f|%l|%m'
-    let errorformat = '%f|:|%l|:|%m'
-    let makeprg = self.makeprgBuild({ 'args_before': '-c ' . extra })
-
-    let errors = SyntasticMake({
-        \ 'makeprg': makeprg,
-        \ 'errorformat': errorformat,
-        \ 'Preprocess': 'Perl6Preprocess',
-        \ 'defaults': {'type': 'E'} })
-    if !empty(errors)
-        return errors
-    endif
-
-    "let makeprg = self.makeprgBuild({ 'args_before': '-c ' . extra })
-
-    return SyntasticMake({
-        \ 'makeprg': makeprg,
-        \ 'errorformat': errorformat,
-        \ 'Preprocess': 'Perl6Preprocess',
-        \ 'defaults': {'type': 'W'} })
-endfunction " }}}1
 
 call g:SyntasticRegistry.CreateAndRegisterChecker({
     \ 'filetype': 'perl6',
