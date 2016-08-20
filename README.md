@@ -57,8 +57,8 @@ $ vim my_perl6_program
 ```
 
 ## Make this plugin better
-- Send a PR and make the code (vimscript) the code where needed.
-- Send a PR and add test for error cases not yet tested (see the t directory)
+- Send a PR to make the code (vimscript) the code where needed.
+- Send a PR to add tests for error cases not yet tested (see the t directory)
 or -more importantely- catched.
 - Post an issue if you find a bug or find errors not catched. In that case
 copy-paste the error (e.g. within vim: :!perl6 -c %) and post a sample
