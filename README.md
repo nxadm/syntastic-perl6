@@ -46,7 +46,7 @@ let g:syntastic_perl6_checkers = [ 'perl6latest']
 "Enable the perl6latest checker
 let g:syntastic_enable_perl6latest_checker = 1
 ```
-## Module path of you code
+## Module path of your code
 There are two ways of dealing with unknown lib path perl6 errors,
 you can populate the g:syntastic_perl6_lib_path with default lib dirs,
 and/or more practically set the PERL6LIB shell variable in the shell that will
@@ -56,10 +56,13 @@ $ export PERL6LIB=~/Code/Perl6Module/lib:~/Code/SomeOtherModule/lib
 $ vim my_perl6_program
 ```
 
-## Issues
-Post an issue if you found Perl 6 syntax (compile) errors not yet catched
-within vim. Copy-paste the error (e.g. within vim: :!perl6 -c %) and a sample
-of the error code in question.
+## Make this plugin better
+- Send a PR and make the code (vimscript) the code where needed.
+- Send a PR and add test for error cases not yet tested (see the t directory)
+or -more importantely- catched.
+- Post an issue if you find a bug or find errors not catched. In that case
+copy-paste the error (e.g. within vim: :!perl6 -c %) and post a sample
+of the erroneous Perl 6 code in question.
 
 ## Implemented compile time errors
 - Show regular errors of the type:
