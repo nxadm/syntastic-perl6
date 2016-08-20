@@ -36,11 +36,15 @@ let g:syntastic_check_on_wq = 0
 set statusline+=%#warningmsg#
 set statusline+=%{SyntasticStatuslineFlag()}
 set statusline+=%*
-"Enable perl6 support
-let g:syntastic_enable_perl6_checker = 1
-"Perl 6 include path:
-"comma separated list of quoted paths to be included to -I
-"let g:syntastic_perl6_lib_path = []
+"Perl 6 support
+"Optional comma separated list of quoted paths to be included to -I
+"let g:syntastic_perl6_lib_path = [ '/home/user/Code/some_project/lib', 'lib' ]
+"Optional perl6 binary (defaults to perl6)
+"let g:syntastic_perl6_interpreter = '/home/claudio/tmp/perl6'
+"Register the checker provided by this plugin
+let g:syntastic_perl6_checkers = [ 'perl6latest']
+"Enable the perl6latest checker
+let g:syntastic_enable_perl6latest_checker = 1
 ```
 ## Module path of you code
 There are two ways of dealing with unknown lib path perl6 errors,

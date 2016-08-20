@@ -19,11 +19,11 @@
 " any BEGIN, and CHECK blocks in your file. This is probably fine if you 
 " wrote the file yourself, but it can be a problem if you're trying to 
 " check third party files. If you are 100% willing to let Vim run the code 
-" in your file, set g:syntastic_enable_perl6_checker to 1 in your vimrc 
+" in your file, set g:syntastic_enable_perl6latest_checker to 1 in your vimrc 
 " to enable this
 " checker:
 "
-"   let g:syntastic_enable_perl6_checker = 1
+"   let g:syntastic_enable_perl6latest_checker = 1
 "
 " References:
 "
@@ -195,7 +195,7 @@ call g:SyntasticRegistry.CreateAndRegisterChecker({
     \ 'filetype': 'perl6',
     \ 'name': 'perl6latest',
     \ 'exec': 'perl6',
-    \ 'enable': 'enable_perl6_checker'})
+    \ 'enable': 'enable_perl6latest_checker'})
 
 let &cpo = s:save_cpo
 unlet s:save_cpo
