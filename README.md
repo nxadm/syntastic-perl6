@@ -59,8 +59,8 @@ $ vim my_perl6_program
 ## Make this plugin better
 - Send a PR to make the code (vimscript) better where needed.
 - Send a PR to add tests for error cases not yet tested (see the t directory)
-or -more importantely- catched.
-- Post an issue if you find a bug or find errors not catched. In that case
+or -more importantely- caught.
+- Post an issue if you find a bug or find errors not caught. In that case
 copy-paste the error (e.g. within vim: :!perl6 -c %) and post a sample
 of the erroneous Perl 6 code in question.
 
