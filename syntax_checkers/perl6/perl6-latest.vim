@@ -107,6 +107,9 @@ function! Perl6LatestPreprocess(errors) abort
     let line = 0
     let column = 0
     let msg = ''
+    if a:errors[0] == 'Syntax OK'
+        return out
+    endif
 
     for e in a:errors
         if e =~# '\m^\s*$'
