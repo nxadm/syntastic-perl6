@@ -12,8 +12,8 @@ Perl 6 support (until these changes are incorporated upstream).
 You need to install syntastic to use this plugin. Instructions for
 [pathogen plugin manager] (https://github.com/tpope/vim-pathogen "vim-pathogen"):
 ```
-$ cd ~/.vim && git clone https://github.com/scrooloose/syntastic ~/.vim/bundle/synastic
-$ cd ~/.vim && git clone https://github.com/nxadm/syntastic-perl6 ~/.vim/bundle/synastic-perl6
+$ cd ~/.vim && git clone https://github.com/scrooloose/syntastic.git ~/.vim/bundle/synastic
+$ cd ~/.vim && git clone https://github.com/nxadm/syntastic-perl6.git ~/.vim/bundle/synastic-perl6
 ```
 Type ":Helptags" in Vim to generate Help Tags.
 
