@@ -86,7 +86,6 @@ function! SyntaxCheckers_perl6_perl6latest_IsAvailable() dict
     endif
 
     if exists('g:syntastic_perl6_perl6latest_exec')
-        echom 'path A'
         silent! call syntastic#util#system(
                     \g:syntastic_perl6_perl6latest_exec . ' -e ' .
                     \syntastic#util#shescape('exit(0)'))
