@@ -92,3 +92,5 @@ Could not find <name> at line <line> in:
 
 ## Author
 nxadm (El_Che @ #perl6 (freenode))
+
+A big thanks to lcd047 (syntasic contributor) for the many pointers and corrections.
