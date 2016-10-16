@@ -8,6 +8,11 @@ While the Vim syntax check plugin [syntastic]
 support, it does not at the moment support Perl 6.  This plugin implements
 Perl 6 support (until these changes are incorporated upstream).
 
+[ Since the 2016.09 Rakudo release, rakudo supports JSON error support. This
+plugin will be adapted accordingly. Rakudo 2016.09 will be the minimum
+required version. This regex based functionality will be archived in a
+branch. Work in progress. ]
+
 ## Installation & configuration
 You need to install syntastic to use this plugin. Instructions for
 [pathogen plugin manager] (https://github.com/tpope/vim-pathogen "vim-pathogen"):
