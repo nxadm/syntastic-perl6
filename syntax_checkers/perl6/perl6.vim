@@ -1,6 +1,8 @@
 "============================================================================
-"File:        perl6.vim
-"Description: Syntax checking plugin for syntastic.vim. This plugin tracks
+"File:        perl6_jsonerror.vim
+"Description: Syntax checking plugin for syntastic.vim. This plugin parses the
+"             JSON error output enabled by the environment variable
+"             RAKKUDO_EXCEPTIONS_HANDLER>="JSON"
 "             the latest rekudo version and is more up to date than
 "             the (future) perl6 support in syntastic core (by the same
 "             authors).
@@ -87,7 +89,7 @@ function! SyntaxCheckers_perl6_perl6_GetHighlightRegex(item)
 "    return term !=# '' ? '\V' . escape(term, '\') : ''
 endfunction
 
-function! SyntaxCheckers_perl6_perl6_GetLocList() dict
+function! SyntaxCheckers_perl6_json_GetLocList() dict
     " Read lib path from .vimrc
     if type(g:syntastic_perl6_lib_path) == type('')
         call syntastic#log#oneTimeWarn(
