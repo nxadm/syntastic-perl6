@@ -1,6 +1,6 @@
 # Perl 6 support for vim-syntastic
 
-![Alt text](/../json/screenshot-perl6.png?raw=true "Screenshot")
+![Alt text](/../master/screenshot-perl6.png?raw=true "Screenshot")
 
 
 While the Vim syntax check plugin [syntastic]
@@ -20,7 +20,6 @@ You need to install syntastic to use this plugin. Instructions for
 $ cd ~/.vim
 $ git clone https://github.com/scrooloose/syntastic.git ~/.vim/bundle/synastic
 $ git clone https://github.com/nxadm/syntastic-perl6.git ~/.vim/bundle/synastic-perl6
-$ git checkout json
 ```
 Type ":Helptags" in Vim to generate Help Tags.
 
