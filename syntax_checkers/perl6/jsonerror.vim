@@ -73,9 +73,13 @@ function! SyntaxCheckers_perl6_jsonerror_IsAvailable() dict
     endif
 endfunction
 
-" TODO: add highlighting
 function! SyntaxCheckers_perl6_jsonerror_GetHighlightRegex(item)
-    return a:item['pattern']
+    let term = a:item['pattern']
+    if term != ''
+        let term = substitute(a:item['pattern'], '^\^\\V', '', '')
+        let term = substitute(term, '\\\$$', '', '')
+        return '\V' . term
+    endif
 endfunction
 
 function! SyntaxCheckers_perl6_jsonerror_GetLocList() dict
