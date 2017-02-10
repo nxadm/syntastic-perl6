@@ -43,7 +43,7 @@ set statusline+=%*
 let g:syntastic_perl6_checkers = ['perl6']
 "Enable the perl6 checker (disabled out of the box because of security reasons:
 "'perl6 -c' executes the BEGIN and CHECK block of code it parses. This should
-"be fine for your own code.
+"be fine for your own code. See: https://docs.perl6.org/programs/00-running
 let g:syntastic_enable_perl6_checker = 1
 ```
 ## Module path of your code

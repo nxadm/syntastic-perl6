@@ -17,10 +17,10 @@
 " Security:
 "
 " This checker runs 'perl6 -c' against your file, which in turn executes
-" any BEGIN, and CHECK blocks in your file. This is probably fine if you 
-" wrote the file yourself, but it can be a problem if you're trying to 
-" check third party files. If you are 100% willing to let Vim run the code 
-" in your file, set g:syntastic_enable_perl6_checker to 1 in your vimrc 
+" any BEGIN, and CHECK blocks in your file. This is probably fine if you
+" wrote the file yourself, but it can be a problem if you're trying to
+" check third party files. If you are 100% willing to let Vim run the code
+" in your file, set g:syntastic_enable_perl6_checker to 1 in your vimrc
 " to enable this
 " checker:
 "
@@ -30,7 +30,7 @@
 "
 " - https://docs.perl6.org/programs/00-running
 
-" Initialization 
+" Initialization
 "
 if exists('g:loaded_syntastic_perl6_perl6_checker')
     finish
@@ -64,11 +64,11 @@ function! SyntaxCheckers_perl6_perl6_IsAvailable() dict
         return v:shell_error == 0
     else
         " Default to perl6
-        if !executable(self.getExec())                                              
-            return 0                                                                
+        if !executable(self.getExec())
+            return 0
         else
             return 1
-        endif 
+        endif
     endif
 endfunction
 
@@ -187,12 +187,12 @@ endfunction
 
 
 " Copied from syntastic's util.vim
-" strwidth() was added in Vim 7.3; if it doesn't exist, we use strlen()         
-" and hope for the best :)                                                      
-let s:_width = function(exists('*strwidth') ? 'strwidth' : 'strlen')            
-lockvar s:_width                                                                
+" strwidth() was added in Vim 7.3; if it doesn't exist, we use strlen()
+" and hope for the best :)
+let s:_width = function(exists('*strwidth') ? 'strwidth' : 'strlen')
+lockvar s:_width
 function! Strwidth(str) abort
-    return s:_width(a:str)                                                      
+    return s:_width(a:str)
 endfunction
 
 call g:SyntasticRegistry.CreateAndRegisterChecker({
