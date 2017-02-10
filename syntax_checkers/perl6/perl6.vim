@@ -1,11 +1,10 @@
 "============================================================================
-"File:        perl6_jsonerror.vim
+"File:        perl6.vim
 "Description: Syntax checking plugin for syntastic.vim. This plugin parses the
 "             JSON error output enabled by the environment variable
-"             RAKKUDO_EXCEPTIONS_HANDLER>="JSON"
-"             the latest rekudo version and is more up to date than
-"             the (future) perl6 support in syntastic core (by the same
-"             authors).
+"             RAKUDO_EXCEPTIONS_HANDLER>="JSON".
+"             Minimal Rakudo version needed: 2016.09 (JSON error output
+"             added).
 "Maintainer:  Claudio Ramirez <pub.claudio at gmail dot com>,
 "License:     This program is free software. It comes without any warranty,
 "             to the extent permitted by applicable law. You can redistribute

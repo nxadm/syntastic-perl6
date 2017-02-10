@@ -42,7 +42,8 @@ set statusline+=%*
 "Register the checker provided by this plugin
 let g:syntastic_perl6_checkers = ['perl6']
 "Enable the perl6 checker (disabled out of the box because of security reasons:
-"'perl6 -c' executes the code it parses.
+"'perl6 -c' executes the BEGIN and CHECK block of code it parses. This should
+"be fine for your own code.
 let g:syntastic_enable_perl6_checker = 1
 ```
 ## Module path of your code
