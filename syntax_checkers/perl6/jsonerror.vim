@@ -74,21 +74,9 @@ function! SyntaxCheckers_perl6_jsonerror_IsAvailable() dict
 endfunction
 
 " TODO: add highlighting
-"function! SyntaxCheckers_perl6_jsonerror_GetHighlightRegex(item)
-"    " Default (catches also '^Can only use'
-"    let term = matchstr(a:item['text'], '\m''\zs.\{-}\ze''')
-"    if term !=# ''
-"        return '\V' . escape(term, '\')
-"    endif
-"    "Undeclare routines and names
-"    let term = matchstr(a:item['text'], '\m^Undeclared .\+:\W\zs\S\+\ze')
-"    if term !=# ''
-"        return '\V' . escape(term, '\')
-"    endif
-"    "Not found modules
-"    let term = matchstr(a:item['text'], '\mCould not find \zs.\{-}\ze at')
-"    return term !=# '' ? '\V' . escape(term, '\') : ''
-"endfunction
+function! SyntaxCheckers_perl6_jsonerror_GetHighlightRegex(item)
+    return a:item['pattern']
+endfunction
 
 function! SyntaxCheckers_perl6_jsonerror_GetLocList() dict
     " Read syntastic_perl6lib path from .vimrc
