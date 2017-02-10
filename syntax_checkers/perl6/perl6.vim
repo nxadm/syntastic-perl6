@@ -2,7 +2,7 @@
 "File:        perl6.vim
 "Description: Syntax checking plugin for syntastic.vim. This plugin parses the
 "             JSON error output enabled by the environment variable
-"             RAKUDO_EXCEPTIONS_HANDLER>="JSON".
+"             RAKUDO_EXCEPTIONS_HANDLER='JSON'.
 "             Minimal Rakudo version needed: 2016.09 (JSON error output
 "             added).
 "Maintainer:  Claudio Ramirez <pub.claudio at gmail dot com>,
@@ -30,17 +30,18 @@
 "
 " - https://docs.perl6.org/programs/00-running
 
+
+"
 " Initialization
 "
-if exists('g:loaded_syntastic_perl6_perl6_checker')
+if exists('g:loaded_syntastic_perl6_checker')
     finish
 endif
-let g:loaded_syntastic_perl6_perl6_checker = 1
-
-if !exists('g:syntastic_perl6_lib_path')
+let g:loaded_syntastic_perl6_checker = 1
+"Library paths to be add to 'perl6 -I'
+if !exists('g:syntastic_perl6lib')
     let g:syntastic_perl6_lib_path = []
 endif
-
 " Add support for perl6 filetype
 if exists('g:syntastic_extra_filetypes')
     call add(g:syntastic_extra_filetypes, 'perl6')
@@ -51,15 +52,16 @@ endif
 let s:save_cpo = &cpo
 set cpo&vim
 
-function! SyntaxCheckers_perl6_perl6_IsAvailable() dict
-    " Set the perl6 executable from .vimrc
-    if exists('g:syntastic_perl6_interpreter')
-        let g:syntastic_perl6_perl6_exec = g:syntastic_perl6_interpreter
-    endif
+"
+" Functions
+"
 
-    if exists('g:syntastic_perl6_perl6_exec')
+" Set the perl6 executable
+function! SyntaxCheckers_perl6_IsAvailable() dict
+    " From .vimrc
+    if exists('g:syntastic_perl6_exec')
         silent! call syntastic#util#system(
-                    \g:syntastic_perl6_perl6_exec . ' -e ' .
+                    \g:syntastic_perl6_exec . ' -e ' .
                     \syntastic#util#shescape('exit(0)'))
         return v:shell_error == 0
     else

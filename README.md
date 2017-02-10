@@ -36,9 +36,9 @@ set statusline+=%*
 
 "Perl 6 support
 "Optional comma separated list of quoted paths to be included to -I
-"let g:syntastic_perl6_lib_path = [ '/home/user/Code/some_project/lib', 'lib' ]
+"let g:syntastic_perl6lib = [ '/home/user/Code/some_project/lib', 'lib' ]
 "Optional perl6 binary (defaults to perl6 in your PATH)
-"let g:syntastic_perl6_interpreter = '/opt/rakudo/bin/perl6'
+"let g:syntastic_perl6_exec = '/opt/rakudo/bin/perl6'
 "Register the checker provided by this plugin
 let g:syntastic_perl6_checkers = ['perl6']
 "Enable the perl6 checker (disabled out of the box because of security reasons:
