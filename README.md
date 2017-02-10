@@ -47,9 +47,9 @@ set statusline+=%*
 "Optional perl6 binary (defaults to perl6)
 "let g:syntastic_perl6_interpreter = '/home/claudio/tmp/perl6'
 "Register the checker provided by this plugin
-let g:syntastic_perl6_checkers = [ 'perl6latest']
-"Enable the perl6latest checker
-let g:syntastic_enable_perl6latest_checker = 1
+let g:syntastic_perl6_checkers = [ 'perl6']
+"Enable the perl6 checker
+let g:syntastic_enable_perl6_checker = 1
 ```
 ## Module path of your code
 There are two ways of dealing with unknown lib path perl6 errors,

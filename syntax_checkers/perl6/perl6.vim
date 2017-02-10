@@ -1,5 +1,5 @@
 "============================================================================
-"File:        perl6latest.vim
+"File:        perl6.vim
 "Description: Syntax checking plugin for syntastic.vim. This plugin tracks
 "             the latest rekudo version and is more up to date than
 "             the (future) perl6 support in syntastic core (by the same
@@ -19,11 +19,11 @@
 " any BEGIN, and CHECK blocks in your file. This is probably fine if you 
 " wrote the file yourself, but it can be a problem if you're trying to 
 " check third party files. If you are 100% willing to let Vim run the code 
-" in your file, set g:syntastic_enable_perl6latest_checker to 1 in your vimrc 
+" in your file, set g:syntastic_enable_perl6_checker to 1 in your vimrc 
 " to enable this
 " checker:
 "
-"   let g:syntastic_enable_perl6latest_checker = 1
+"   let g:syntastic_enable_perl6_checker = 1
 "
 " References:
 "
@@ -31,10 +31,10 @@
 
 " Initialization 
 "
-if exists('g:loaded_syntastic_perl6_perl6latest_checker')
+if exists('g:loaded_syntastic_perl6_perl6_checker')
     finish
 endif
-let g:loaded_syntastic_perl6_perl6latest_checker = 1
+let g:loaded_syntastic_perl6_perl6_checker = 1
 
 if !exists('g:syntastic_perl6_lib_path')
     let g:syntastic_perl6_lib_path = []
@@ -50,7 +50,7 @@ endif
 let s:save_cpo = &cpo
 set cpo&vim
 
-function! SyntaxCheckers_perl6_perl6latest_GetLocList() dict
+function! SyntaxCheckers_perl6_perl6_GetLocList() dict
     " Read lib path from .vimrc
     if type(g:syntastic_perl6_lib_path) == type('')
         call syntastic#log#oneTimeWarn(
@@ -73,21 +73,21 @@ function! SyntaxCheckers_perl6_perl6latest_GetLocList() dict
     return SyntasticMake({
         \ 'makeprg': makeprg,
         \ 'errorformat': errorformat,
-        \ 'env': { 'RAKUDO_ERROR_COLOR': '0' },
+        \ 'env': { 'RAKUDO_EXCEPTIONS_HANDLER': '1' },
         \ 'defaults': { 'bufnr': bufnr(''), 'type': 'E' },
         \ 'returns': [0, 1],
-        \ 'Preprocess': 'Perl6LatestPreprocess' })
+        \ 'Preprocess': 'Perl6Preprocess' })
 endfunction
 
-function! SyntaxCheckers_perl6_perl6latest_IsAvailable() dict
+function! SyntaxCheckers_perl6_perl6_IsAvailable() dict
     " Set the perl6 executable from .vimrc
     if exists('g:syntastic_perl6_interpreter')
-        let g:syntastic_perl6_perl6latest_exec = g:syntastic_perl6_interpreter
+        let g:syntastic_perl6_perl6_exec = g:syntastic_perl6_interpreter
     endif
 
-    if exists('g:syntastic_perl6_perl6latest_exec')
+    if exists('g:syntastic_perl6_perl6_exec')
         silent! call syntastic#util#system(
-                    \g:syntastic_perl6_perl6latest_exec . ' -e ' .
+                    \g:syntastic_perl6_perl6_exec . ' -e ' .
                     \syntastic#util#shescape('exit(0)'))
         return v:shell_error == 0
     else
@@ -100,7 +100,7 @@ function! SyntaxCheckers_perl6_perl6latest_IsAvailable() dict
     endif
 endfunction
 
-function! Perl6LatestPreprocess(errors) abort
+function! Perl6Preprocess(errors) abort
     let out = []
     let fname = ''
     let line = 0
@@ -168,7 +168,7 @@ function! Perl6LatestPreprocess(errors) abort
     return syntastic#util#unique(out)
 endfunction
 
-function! SyntaxCheckers_perl6_perl6latest_GetHighlightRegex(item)
+function! SyntaxCheckers_perl6_perl6_GetHighlightRegex(item)
 	" Default (catches also '^Can only use'
     let term = matchstr(a:item['text'], '\m''\zs.\{-}\ze''')
     if term !=# ''
@@ -195,9 +195,9 @@ endfunction
 
 call g:SyntasticRegistry.CreateAndRegisterChecker({
     \ 'filetype': 'perl6',
-    \ 'name': 'perl6latest',
+    \ 'name': 'perl6',
     \ 'exec': 'perl6',
-    \ 'enable': 'enable_perl6latest_checker'})
+    \ 'enable': 'enable_perl6_checker'})
 
 let &cpo = s:save_cpo
 unlet s:save_cpo
