@@ -46,6 +46,9 @@ let g:syntastic_perl6_checkers = ['jsonerror']
 "be fine for your own code. See: https://docs.perl6.org/programs/00-running
 let g:syntastic_enable_perl6_jsonerror_checker = 1
 ```
+Also, you could check [this blogpost on how to configure Vim to as an Perl6
+editor] (https://nxadm.wordpress.com/2016/08/21/vim-as-a-perl-6-editor/).
+
 ## Module path of your code
 There are two ways of dealing with unknown lib path perl6 errors,
 you can populate the g:syntastic_perl6_lib_path, and/or more practically,
