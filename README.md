@@ -36,15 +36,15 @@ set statusline+=%*
 
 "Perl 6 support
 "Optional comma separated list of quoted paths to be included to -I
-"let g:syntastic_perl6lib = [ '/home/user/Code/some_project/lib', 'lib' ]
+let g:syntastic_perl6lib = [ 'lib', '../lib' ]
 "Optional perl6 binary (defaults to perl6 in your PATH)
 "let g:syntastic_perl6_exec = '/opt/rakudo/bin/perl6'
 "Register the checker provided by this plugin
-let g:syntastic_perl6_checkers = ['perl6']
+let g:syntastic_perl6_checkers = ['jsonerror']
 "Enable the perl6 checker (disabled out of the box because of security reasons:
 "'perl6 -c' executes the BEGIN and CHECK block of code it parses. This should
 "be fine for your own code. See: https://docs.perl6.org/programs/00-running
-let g:syntastic_enable_perl6_checker = 1
+let g:syntastic_enable_perl6_jsonerror_checker = 1
 ```
 ## Module path of your code
 There are two ways of dealing with unknown lib path perl6 errors,
