@@ -1,6 +1,6 @@
 # Perl 6 support for vim-syntastic
 
-![Alt text](/../master/screenshot-perl6.png?raw=true "Screenshot")
+![Alt text](/../master/syntastic-perl6.png?raw=true "Screenshot")
 
 
 While the Vim syntax check plugin [syntastic]
