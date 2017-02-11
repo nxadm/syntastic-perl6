@@ -87,7 +87,7 @@ function! SyntaxCheckers_perl6_jsonerror_GetLocList() dict
     if type(g:syntastic_perl6lib) == type('')
         call syntastic#log#oneTimeWarn(
                     \'variable g:syntastic_perl6path should be a list')
-        let includes = split(g:syntastic_perl6_jsonerror_lib_path, ',')
+        let includes = split(g:syntastic_perl6lib, ',')
     else
         let includes = copy(syntastic#util#var('perl6lib', []))
     endif
