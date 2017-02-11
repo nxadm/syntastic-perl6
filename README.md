@@ -1,5 +1,7 @@
 # Perl 6 support for vim-syntastic
 
+[![Build Status](https://travis-ci.org/nxadm/syntastic-perl6.svg?branch=master)](https://travis-ci.org/nxadm/syntastic-perl6)
+
 ![Alt text](/../master/syntastic-perl6.png?raw=true "Screenshot")
 
 
